@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "top_5_worst_cyclist_intersections_2020_2025_20m",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "intersection_id_20m": "40.711_-73.96", "cyclist_deaths": 0, "cyclist_injuries": 18, "total_casualties": 18, "LATITUDE": 40.710785, "LONGITUDE": -73.95995, "first_crash": "2020-02-05T12:40:00", "last_crash": "2025-06-28T16:25:00", "total_crashes": 22 }, "geometry": { "type": "Point", "coordinates": [ -73.95995, 40.710785 ] } },
+{ "type": "Feature", "properties": { "intersection_id_20m": "40.652_-74.007", "cyclist_deaths": 0, "cyclist_injuries": 15, "total_casualties": 15, "LATITUDE": 40.651512, "LONGITUDE": -74.00734, "first_crash": "2021-05-10T14:30:00", "last_crash": "2024-10-23T18:10:00", "total_crashes": 16 }, "geometry": { "type": "Point", "coordinates": [ -74.00734, 40.651512 ] } },
+{ "type": "Feature", "properties": { "intersection_id_20m": "40.702_-73.944", "cyclist_deaths": 0, "cyclist_injuries": 14, "total_casualties": 14, "LATITUDE": 40.701862, "LONGITUDE": -73.94383, "first_crash": "2020-02-15T02:53:00", "last_crash": "2023-11-25T09:19:00", "total_crashes": 17 }, "geometry": { "type": "Point", "coordinates": [ -73.94383, 40.701862 ] } },
+{ "type": "Feature", "properties": { "intersection_id_20m": "40.651_-73.956", "cyclist_deaths": 0, "cyclist_injuries": 14, "total_casualties": 14, "LATITUDE": 40.651016, "LONGITUDE": -73.95587, "first_crash": "2020-04-23T18:00:00", "last_crash": "2025-04-26T18:48:00", "total_crashes": 18 }, "geometry": { "type": "Point", "coordinates": [ -73.95587, 40.651016 ] } },
+{ "type": "Feature", "properties": { "intersection_id_20m": "40.653_-74.006", "cyclist_deaths": 0, "cyclist_injuries": 14, "total_casualties": 14, "LATITUDE": 40.65263, "LONGITUDE": -74.00618, "first_crash": "2021-01-21T19:06:00", "last_crash": "2025-03-27T08:53:00", "total_crashes": 21 }, "geometry": { "type": "Point", "coordinates": [ -74.00618, 40.65263 ] } }
+]
+}

@@ -1,0 +1,72 @@
+# .gitignore
+
+# ####################################################################
+# ## Environment variables
+# ## Files used to store environment-specific variables, including API keys.
+# ####################################################################
+.env
+.env.*
+!.env.example
+
+# ####################################################################
+# ## Configuration Files
+# ## Common config files that often contain sensitive data.
+# ####################################################################
+config.json
+config.yml
+config.yaml
+credentials.json
+credentials.yml
+credentials.yaml
+secrets.js
+secrets.json
+
+# ####################################################################
+# ## Generic Secret Files
+# ## Catch-all for files that might contain secrets.
+# ####################################################################
+*key.json
+*secret*.json
+*credential*.json
+
+# ####################################################################
+# ## Common Framework and System Files
+# ## These should be ignored in almost any project.
+# ####################################################################
+
+# Node / JavaScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# ####################################################################
+# ## Build output
+# ####################################################################
+/build/
+/dist/
+/out/
+
+
+# Ignore specific raw data folders to keep the repository size down
+Raw Data/New York City Bike Routes_20250629/
+Raw Data/nyclion_25b/
+Raw Data/PedestriansCyclistsKilledInjured.csv
+Raw Data/New York City Bike Routes_20250629.geojson
+Raw Data/Motor_Vehicle_Collisions_-_Crashes_20250630.csv
+Clean Data/brooklyn_ped_cyclist_crashes_2012_2024_WIR.geojson
+Clean Data/brooklyn_ped_cyclist_crashes_2012_2024.geojson
+Clean Data/trimmed_bikelanes.geojson
+Clean Data/crashes_2012_2025_Brooklyn.geojson
+Clean Data/crashes_2012_2025.geojson
+Clean Data/cleaned_crash_data.geojson

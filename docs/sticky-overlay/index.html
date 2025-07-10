@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Scrollama: Sticky Overlay Example</title>
+	<meta name="description" content="Scrollama: Sticky Overlay Example" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Geo:ital@0;1&family=Honk:MORF,SHLN@24,10&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+	
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="../style.css" />
+	<style>
+		
+		.hidden {
+			opacity: 0;
+  			pointer-events: none; /* Prevents interaction with hidden images */
+		}
+
+		figure img,
+		figure video {
+			position: absolute; /* This stacks them on top of each other */
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: contain; /* Use 'contain' or 'cover' */
+			transition: opacity 0.6s ease-in-out;
+		}
+
+		.intro_body {
+			font-family: "Source Code Pro", monospace;
+			font-optical-sizing: auto;
+			font-weight: 500;
+			font-style: normal;
+			margin-top: 2rem;
+			font-size: 1.1rem;
+			color: #FFFFFF;
+			text-align: left;
+			line-height: 1.6; 
+		}
+		#scrolly {
+			position: relative;
+			background-color: #292929;
+			padding: 1rem;
+		}
+
+		article {
+			position: relative;
+			padding: 0;
+			max-width: 20rem;
+			margin: 0 auto;
+		}
+
+		figure {
+			position: -webkit-sticky;
+			position: sticky;
+			left: 0;
+			width: 100%;
+			margin: 0;
+			-webkit-transform: translate3d(0, 0, 0);
+			-moz-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			background-color: transparent;
+			z-index: 0;
+		}
+
+		/* figure p {
+			text-align: center;
+			padding: 1rem;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-moz-transform: translate(-50%, -50%);
+			-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			font-size: 8rem;
+			font-weight: 900;
+			color: #fff;
+		} */
+
+		.step {
+			margin: 0 auto 2rem auto;
+			color: #fff;
+			background-color: rgba(0, 0, 0, 0.0);
+		}
+
+		.step:last-child {
+			margin-bottom: 0;
+		}
+
+		.step.is-active p {
+			background-color: rgb(41, 35, 50);
+			color: #ffff00;
+		}
+
+		.step p {
+			font-family: "Source Code Pro", monospace;
+			font-optical-sizing: auto;
+			font-weight: 500;
+			font-style: normal;
+			padding: 1rem;
+			font-size: 1.1rem;
+			line-height: 1.6;
+			background-color: #3b3b3b;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- <a href="https://github.com/russellsamora/scrollama" target="_blank" class="github-corner"
+		aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250"
+			style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+			<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+			<path
+				d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+				fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+			<path
+				d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+				fill="currentColor" class="octo-body"></path>
+		</svg></a> -->
+	<main>
+		<!-- <nav>
+			<a href="https://github.com/russellsamora/scrollama">scrollama.js</a>
+			<div class="nav__examples">
+				<p>Examples:</p>
+				<a href="https://russellsamora.github.io/scrollama/basic">Basic</a>
+				<a href="https://russellsamora.github.io/scrollama/progress">Progress</a>
+				<a href="https://russellsamora.github.io/scrollama/sticky-side">Sticky Side</a>
+				<a href="https://russellsamora.github.io/scrollama/sticky-overlay">Sticky Overlay</a>
+				<a href="https://russellsamora.github.io/scrollama/mobile-pattern">Mobile Pattern</a>
+			</div>
+		</nav> -->
+		<section id="intro">
+			<h1 class="intro__hed">Brooklyn's Cycling Danger Zones</h1>
+			<p class="intro__dek">
+				And what the city is doing about it.
+			</p>
+			<p class="intro_body">
+				Brooklyn has just been crowned the <a href="https://www.peopleforbikes.org/news/america-has-a-new-best-large-city-for-biking">
+				best large city for cycling in the US</a>. We've done it. My cyclist friends and I will sit around in silence while sipping beers
+				as there's nothing for us to talk about anymore. I too biked, Brooklyn of ample hills was mine.
+			</p>
+			
+			<p class="intro_body">
+				Behold, the best cycling network in any large city in the US.
+			</p>
+
+		</section>
+
+		<section id="scrolly">
+			<figure>
+				<img id="basemap1" src="assets/basemapend.jpg" alt="Map of Brooklyn's bike network">
+				<img id="basemap2" src="assets/basemapend_crashes.jpg" alt="Map of crashes in Brooklyn" class="hidden">
+				<img id="basemap3" src="assets/basemapend_crashes_hotspots.jpg" alt="Map of crashes in Brooklyn with labels" class="hidden">
+				<img id="basemap4" src="assets/basemapend_grand.jpg" alt="Map of Grand Street zone" class="hidden">
+				<img id="basemap5" src="assets/doublepark.jpg" alt="image of car parked in bike lane on grand street" class="hidden">
+				<img id="basemap6" src="assets/flexiblock.webp" alt="image of car parked inside delineators on grand street bike lane" class="hidden">
+				<img id="basemap7" src="assets/concblock.webp" alt="image of car blocking bike lane protected by concrete barriers." class="hidden">
+				<img id="basemap8" src="assets/adjcrash.jpg" alt="diagram of adjacent crashes, 29% of total." class="hidden">
+				<img id="basemap9" src="assets/rightcrash.jpg" alt="diagram of right angle crashes, 27% of total." class="hidden">
+				<img id="basemap10" src="assets/turncrash.jpg" alt="diagram of vehicle turn crashes, 21% of total." class="hidden">
+				<img id="basemap11" src="assets/tcalming.png" alt="Examples of calming features in Brooklyn." class="hidden">
+				<img id="basemap12" src="assets/basemapend_crashes_traffic.jpg" alt="Map of traffic calming features in Brooklyn" class="hidden">
+				<img id="basemap13" src="assets/features.png" alt="photos of traffic calming measures" class="hidden">
+				<img id="basemap14" src="assets/basemapend_crashes_traffic_worst.jpg" alt="Map of 5 most dangerous intersections for cyclists in Brooklyn" class="hidden">
+				<img id="basemap15" src="assets/top5label.jpg" alt="Map of 5 most dangerous intersections for cyclists in Brooklyn, labeled with stats" class="hidden">
+				<video id="basemap16" src="assets/bedford.webm" muted playsinline loop class="hidden"></video>
+				<video id="basemap17" src="assets/broadway.webm" muted playsinline loop class="hidden"></video>
+				<video id="basemap18" src="assets/4thave.webm" muted playsinline loop class="hidden"></video>
+				<video id="basemap19" src="assets/roebling.webm" muted playsinline loop class="hidden"></video>
+				<img id="basemap20" src="assets/basemapend.jpg" alt="Map of Brooklyn's bike network">
+			</figure>
+
+			<article>
+				<div class="step" data-step="1">
+					<p>Look at those beautiful green lines, interlocking so densely to protect cyclists from any harm that might come to them! </p>
+					<p>But beneath the surface of this new network lies a ghost map- a history of crashes that tells a different story. </p>
+					
+				</div>
+				<div class="step" data-step="2">
+					<p>This is a heatmap of cyclists injuries and deaths from July 2012 to June 2025 according to NYPD data. That's 18,455 injuries, 
+						and 71 deaths, averaging at 4 injuries per day.</p>
+				</div>
+				
+				<div class="step" data-step="3">
+					<p>Here are some of the zones with the highest volume of crashes</p>
+					<p>It's not that these zones don't have bikelanes. Only the Broadway zone doesn't have a bike lane. But it 
+						shows that bike lanes alone don't solve the problem. </p>
+				</div>
+				
+				<div class="step" data-step="4">
+					<p>The Grand Street bike lane is currently the most heavily protected of these. 
+						To understand why crashes continue to occur despite trying, let's take a closer look.
+					</p>
+				</div>
+
+				<div class="step" data-step="5">
+					<p>This is what the old unprotected bike lane looked like. To drivers, the green color of the bike lane was too tempting
+						not to park on.
+					</p>
+				</div>				
+
+				<div class="step" data-step="6">
+					<p>To stop vehicles from parking in the bike lane, in <a href="https://nyc.streetsblog.org/2020/01/04/dot-will-truly-protect-grand-street-protected-bike-lane">2020</a>, 
+						the NYC Department of Transportation installed some bendy sticks to increase protection after years of delays.  They didn't help.</p>
+				</div>
+
+				<div class="step" data-step="7">
+					<p>Concrete barriers were installed in 
+					<a href="https://www.northbrooklyndispatch.com/2022/09/22/grand-street-bike-lanes-getting-concrete-protection/">2022</a>. 
+					vehicles continued to park at the beginning of barriers anyway.</p>
+					<p>Can't even get into or out of the bike lane now! It's kind of funny, but then we have to remember it's a matter of life and death!</p>
+				</div>
+
+				<div class="step" data-step="8">
+					<p>This illustrates the problem of what the DoT calls adjacent crashes. 
+					</p>
+				</div>				
+
+				<div class="step" data-step="9">
+					<p>89% of crashes happen at intersections. </p>
+					<p>This includes adjacent crashes, as well as right angle crashes. </p>
+				</div>
+
+				<div class="step" data-step="10">
+					<p>And also vehicle turn crashes. (My least favourite, personnaly.) </p>
+					<p>In a city of grids, there is no choice but to find ways to make intersections safer. </p>
+				</div>
+
+				<div class="step" data-step="11">
+					<p> Starting in 2016, the NYC DoT started to build "traffic calming measures" to slow down road users and increase 
+					visibility while turning.</p>
+				</div>
+
+				<div class="step" data-step="12">
+					<p>Although I don't have cyclist specific data. I can say from experience that they- 
+					<p>1. stop cars from cutting the corner while turning.</p>
+					<p>2. Provide a safe place to stop for any reason.</p>
+					<p>Here are all the locations where they have been installed in Brooklyn.</p>
+				</div>
+				
+				<div class="step" data-step="13">
+					<p>A recent <a href="https://lede-admin.nyc.streetsblog.org/wp-content/uploads/sites/48/2025/01/DOT-Daylighting-Study.pdf">DoT study</a>
+					on universal daylighting showed that a variety of measures need to be taken to reduce crashes.</p>
+					<p>Ultimately, the things that makes pedestrians safe are also the things that can make cyclists safer.</p>
+				</div>
+				<div class="step" data-step="14">
+					<p>Despite being the best large city for cycling in the US. Brooklyn's still got a long way to go when it comes to cycling safety.</p>
+					<p>So until then, riders still have to ride safely and be aware of their surroundings.</p>
+					<p>Here is a map of the worst intersections in Brooklyn in the last 5 years.</p>
+				</div>
+
+				<div class="step" data-step="15">
+					<p>Here are some stats. As you can see, lots of crashes occur on a wide variety of streets.</p>
+					<p> Come ride some of them with me so you don't have to! You can take a safer side street.</p>
+				</div>
+
+				<div class="step" data-step="16">
+					<p>This is Bedford Ave and Martense st in Flatbush.</p>
+					<p>I've had a really close call here before, and you can see why, it's a major road, no protection, 
+						and cyclists probably have to ride around the bus when it's at the bus stop.</p>
+				</div>
+
+				<div class="step" data-step="17">
+					<p>This is Broadway and Thornton at the Broadway Triangle.</p>
+					<p>No bike lane here, an infamous (for blocking bike lanes) Piece of Cake Moving truck is parked here, the intersection is at an awkward angle, making
+						it easier to misjudge the situation. The train track pillar is also blocking the view to look right. </p>
+				</div>
+
+				<div class="step" data-step="18">
+					<p>This is 4th Ave and 41st Street in Sunset Park</p>
+					<p>4th Ave is wide, and well known for cars making turns at high speeds. 
+						This is dangerous because the bike lane is protected by parked cars (visible on the left edge of the video). 
+						So the cyclist and the turning driver couldn't see each other.
+						The recently installed empty space helps a lot to improve visibility, but that space is often used as parking too.</p>
+				</div>
+
+				<div class="step" data-step="19">
+					<p>This is Roebling St and South 4th St in Williamsburg.</p>
+					<p>While Roebling doesn't have a bike lane, South 4th has a really nice one. I think the issue here is cyclists don't really want to stop here on
+						red lights. There's also some very hard to spot rubber speed bumps on THornton. But this is a weird one.
+					</p>
+				</div>
+
+				<div class="step" data-step="20">
+					<p>So this is the worst of the worst of Brooklyn's Bike infrastructure. </p>
+					<p>America's best large city for cycling!
+					</p>
+				</div>
+
+				
+			</article>
+		</section>
+
+		<section id="outro"></section>
+	</main>
+
+	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+	<script src="../scrollama.min.js"></script>
+	<script>
+
+		// using d3 for convenience
+		var main = d3.select("main");
+		var scrolly = main.select("#scrolly");
+		var figure = scrolly.select("figure");
+		var article = scrolly.select("article");
+		var step = article.selectAll(".step");
+
+		// 1. SELECT ALL YOUR IMAGES
+		var basemap1 = figure.select("#basemap1");
+		var basemap2 = figure.select("#basemap2");
+		var basemap3 = figure.select("#basemap3");
+		var basemap4 = figure.select("#basemap4");
+		var basemap5 = figure.select("#basemap5");
+		var basemap6 = figure.select("#basemap6");
+		var basemap7 = figure.select("#basemap7");
+		var basemap8 = figure.select("#basemap8");
+		var basemap9 = figure.select("#basemap9");
+		var basemap10 = figure.select("#basemap10");
+		var basemap11 = figure.select("#basemap11");
+		var basemap12 = figure.select("#basemap12");
+		var basemap13 = figure.select("#basemap13");
+		var basemap14 = figure.select("#basemap14");
+		var basemap15 = figure.select("#basemap15");
+		var basemap16 = figure.select("#basemap16");
+		var basemap17 = figure.select("#basemap17");
+		var basemap18 = figure.select("#basemap18");
+		var basemap19 = figure.select("#basemap19");
+		var basemap20 = figure.select("#basemap20");
+
+		// initialize the scrollama
+		var scroller = scrollama();
+
+		// generic window resize listener event
+		function handleResize() {
+			var stepH = Math.floor(window.innerHeight * 0.75);
+			step.style("height", stepH + "px");
+
+			var figureHeight = window.innerHeight / 2;
+			var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+			figure
+				.style("height", figureHeight + "px")
+				.style("top", figureMarginTop + "px");
+
+			scroller.resize();
+		}
+
+		// 2. UPDATE THIS FUNCTION
+		function handleStepEnter(response) {
+    // response = { element, direction, index }
+    var currentIndex = response.index;
+
+    step.classed("is-active", function (d, i) {
+        return i === currentIndex;
+    });
+
+    // --- Hide all visuals ---
+    basemap1.classed("hidden", true);
+    basemap2.classed("hidden", true);
+    basemap3.classed("hidden", true);
+    basemap4.classed("hidden", true);
+    basemap5.classed("hidden", true);
+    basemap6.classed("hidden", true);
+    basemap7.classed("hidden", true);
+    basemap8.classed("hidden", true);
+    basemap9.classed("hidden", true);
+    basemap10.classed("hidden", true);
+    basemap11.classed("hidden", true);
+    basemap12.classed("hidden", true);
+    basemap13.classed("hidden", true);
+    basemap14.classed("hidden", true);
+    basemap15.classed("hidden", true);
+    basemap16.classed("hidden", true);
+    basemap17.classed("hidden", true);
+    basemap18.classed("hidden", true);
+    basemap19.classed("hidden", true);
+    basemap20.classed("hidden", true);
+    
+	// --- Pause all videos ---
+    basemap16.node().pause();
+    basemap17.node().pause();
+    basemap18.node().pause();
+    basemap19.node().pause();
+
+    // --- Show the correct visual and PLAY if it's a video ---
+    if (currentIndex === 0) {
+        basemap1.classed("hidden", false);
+    } else if (currentIndex === 1) {
+        basemap2.classed("hidden", false);
+    } else if (currentIndex === 2) {
+        basemap3.classed("hidden", false);
+    } else if (currentIndex === 3) {
+        basemap4.classed("hidden", false);
+    } else if (currentIndex === 4) {
+        basemap5.classed("hidden", false);
+    } else if (currentIndex === 5) {
+        basemap6.classed("hidden", false);
+    } else if (currentIndex === 6) {
+        basemap7.classed("hidden", false);
+    } else if (currentIndex === 7) {
+        basemap8.classed("hidden", false);
+    } else if (currentIndex === 8) {
+        basemap9.classed("hidden", false);
+    } else if (currentIndex === 9) {
+        basemap10.classed("hidden", false);
+    } else if (currentIndex === 10) {
+        basemap11.classed("hidden", false);
+    } else if (currentIndex === 11) {
+        basemap12.classed("hidden", false);
+    } else if (currentIndex === 12) {
+        basemap13.classed("hidden", false);
+    } else if (currentIndex === 13) {
+        basemap14.classed("hidden", false);
+    } else if (currentIndex === 14) {
+        basemap15.classed("hidden", false);
+    } else if (currentIndex === 15) { // Step 16
+        basemap16.classed("hidden", false);
+        basemap16.node().currentTime = 0; // Restart video
+        basemap16.node().play();
+    } else if (currentIndex === 16) { // Step 17
+        basemap17.classed("hidden", false);
+        basemap17.node().currentTime = 0;
+        basemap17.node().play();
+    } else if (currentIndex === 17) { // Step 18
+        basemap18.classed("hidden", false);
+        basemap18.node().currentTime = 0;
+        basemap18.node().play();
+    } else if (currentIndex === 18) { // Step 19
+        basemap19.classed("hidden", false);
+        basemap19.node().currentTime = 0;
+        basemap19.node().play();
+    } else if (currentIndex === 19) {
+        basemap20.classed("hidden", false);
+    }
+}
+
+
+		function init() {
+			handleResize();
+
+			scroller
+				.setup({
+					step: "#scrolly article .step",
+					offset: 0.33,
+					debug: false
+				})
+				.onStepEnter(handleStepEnter);
+		}
+
+		// kick things off
+		init();
+	</script>
+</body>
+
+</html>
