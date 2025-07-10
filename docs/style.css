@@ -140,7 +140,12 @@ nav {
   .step {
         margin-bottom: 8rem; /* Increased from the default */
   }
+
+  .extra-space-after {
+        margin-bottom: 15rem;
   }
+
+ }
 
 #intro {
   /* margin-bottom: 320px; */
