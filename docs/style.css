@@ -137,6 +137,8 @@ nav {
         padding-left: 1rem;
         padding-right: 1rem;
     }
+  .step {
+        margin-bottom: 8rem; /* Increased from the default */
 }
 
 #intro {
