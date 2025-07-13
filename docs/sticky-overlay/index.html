@@ -15,6 +15,34 @@
 	<link rel="stylesheet" href="../style.css" />
 	<style>
 		
+		/* Intro video stuff */
+		
+		/* Make the intro section a positioning container */
+		#intro {
+ 			position: relative;
+  			overflow: hidden; /* This prevents the video from spilling out */
+  			z-index: 1; /* Ensures text stays on top */
+		}
+
+		/* Style the background video */
+		#intro-video {
+  			/* Position it absolutely within the #intro section */
+ 			position: absolute;
+  			top: 50%;
+ 			left: 50%;
+  			transform: translate(-50%, -50%);
+			/* Make sure it fills the container without distortion */
+			min-width: 100%;
+			min-height: 100%;
+			object-fit: cover;
+			/* Send it to the background */
+			z-index: -1;
+			/* Optional: Darken the video to make text more readable */
+			filter: brightness(33%);
+		}
+
+		/* End intro video stuff */
+
 		.hidden {
 			opacity: 0;
   			pointer-events: none; /* Prevents interaction with hidden images */
@@ -29,9 +57,7 @@
 			height: 100%;
 			object-fit: contain; /* Use 'contain' or 'cover' */
 			transition: opacity 0.6s ease-in-out;
-			filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 1));
-			
-			
+			filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 1));	
 		}
 
 		.intro_body {
@@ -44,7 +70,11 @@
 			color: #FFFFFF;
 			text-align: left;
 			line-height: 1.6; 
+			padding-left: 2rem;
+			padding-right: 2rem;
+			padding-bottom: 0.5rem;
 		}
+
 		#scrolly {
 			background-color: #111111;
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2335362d' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
@@ -142,6 +172,13 @@
 			</div>
 		</nav> -->
 		<section id="intro">
+			
+			<section id="intro">
+   				<video id="intro-video" autoplay loop muted playsinline>
+       			<source src="assets/2clips.webm" type="video/mp4">
+   				</video>
+
+			
 			<h1 class="intro__hed">Brooklyn's Cycling Danger Zones</h1>
 			<p class="intro__dek">
 				And what the city is doing about it.
